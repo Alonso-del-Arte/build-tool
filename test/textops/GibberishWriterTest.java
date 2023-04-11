@@ -16,6 +16,8 @@
  */
 package textops;
 
+import java.util.Random;
+
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;
 
@@ -24,6 +26,8 @@ import org.testng.annotations.Test;
  * @author Alonso del Arte
  */
 public class GibberishWriterTest {
+    
+    private static final Random RANDOM = new Random(System.nanoTime());
     
     private static final String UPPERCASE_LETTERS 
             = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -57,6 +61,14 @@ public class GibberishWriterTest {
         assert uppercaseLetterCount > 0 : msg;
         assert digitCount > 0 : msg;
         assertEquals(otherTypeCount, 0, msg);
+    }
+    
+    @Test(expectedExceptions = NegativeArraySizeException.class)
+    public void testRandomAlphanumericRejectsNegativeLength() {
+        int badLength = RANDOM.nextInt() | Integer.MIN_VALUE;
+        System.out.println(GibberishWriter.randomAlphanumeric(badLength));
+        System.out.println("Trying to call randomAlphanumeric() with length " 
+                + badLength + " should have caused NegativeArraySizeException");
     }
     
     @Test
