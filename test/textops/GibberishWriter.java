@@ -68,11 +68,11 @@ class GibberishWriter {
      * @throws NegativeArraySizeException If <code>length</code> is negative.
      */
     static String randomAlphanumeric(int length) {
-        char[] characters = new char[length];
-        for (int i = 0; i < length; i++) {
-            characters[i] = ALPHANUMERICS
-                    .charAt(RANDOM.nextInt(ALPHANUMERICS_LENGTH));
-        }
+//        char[] characters = new char[length];
+//        for (int i = 0; i < length; i++) {
+//            characters[i] = ALPHANUMERICS
+//                    .charAt(RANDOM.nextInt(ALPHANUMERICS_LENGTH));
+//        }
         return "new String(characters)";
     }
     
