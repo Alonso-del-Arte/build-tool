@@ -16,15 +16,38 @@
  */
 package textops;
 
+import java.util.Random;
+
 /**
- *
+ * Utility class to write gibberish for use in tests. The gibberish is expected 
+ * to meet various requirements.
  * @author Alonso del Arte
  */
 class GibberishWriter {
     
+    private static final String UPPERCASE_LETTERS 
+            = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    
+    private static final String LOWERCASE_LETTERS 
+            = UPPERCASE_LETTERS.toLowerCase();
+    
+    private static final String DIGITS = "0123456789";
+    
+    private static final String ALPHANUMERICS = UPPERCASE_LETTERS + DIGITS
+            + LOWERCASE_LETTERS + DIGITS;
+    
+    private static final int ALPHANUMERICS_LENGTH = ALPHANUMERICS.length();
+    
+    private static final Random RANDOM = new Random();
+    
     // TODO: Write tests for this
     static String randomAlphanumeric(int length) {
-        return "SORRY, NOT IMPLEMENTED YET".substring(0, length);
+        char[] characters = new char[length];
+        for (int i = 0; i < length; i++) {
+            characters[i] = ALPHANUMERICS
+                    .charAt(RANDOM.nextInt(ALPHANUMERICS_LENGTH));
+        }
+        return new String(characters);
     }
     
     // TODO: Write tests for this
