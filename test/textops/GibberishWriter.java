@@ -68,12 +68,21 @@ class GibberishWriter {
      * @throws NegativeArraySizeException If <code>length</code> is negative.
      */
     static String randomAlphanumeric(int length) {
-//        char[] characters = new char[length];
-//        for (int i = 0; i < length; i++) {
-//            characters[i] = ALPHANUMERICS
-//                    .charAt(RANDOM.nextInt(ALPHANUMERICS_LENGTH));
-//        }
-        return "new String(characters)";
+        char[] characters = new char[length];
+        int uppercaseLetterCount = 0;
+        for (int i = 0; i < length; i++) {
+            char ch = ALPHANUMERICS
+                    .charAt(RANDOM.nextInt(ALPHANUMERICS_LENGTH));
+            characters[i] = ch;
+            if (UPPERCASE_LETTERS.indexOf(ch) > -1) {
+                uppercaseLetterCount++;
+            }
+        }
+        if (uppercaseLetterCount == 0 && length > 0) {
+            characters[0] = UPPERCASE_LETTERS
+                    .charAt(RANDOM.nextInt(UPPERCASE_LETTERS.length()));
+        }
+        return new String(characters);
     }
     
     // TODO: Write tests for this
