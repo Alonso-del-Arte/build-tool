@@ -86,4 +86,20 @@ public class GibberishWriterTest {
         }
     }
     
+    @Test
+    public void testRandomFilename() {
+        System.out.println("randomFilename");
+        int extLength = 3 + (RANDOM.nextInt(81) % 3);
+        String avoidExt = GibberishWriter.randomAlphanumeric(extLength);
+        String filename = GibberishWriter.randomFilename(avoidExt);
+        int lastPeriodIndex = filename.lastIndexOf('.');
+        assert lastPeriodIndex > -1 && lastPeriodIndex < filename.length() - 1 
+                : "Filename should include period and an extension";
+        String msg = "Filename " + filename + " requested not to end with ." 
+                + avoidExt + " extension should not end with that extension";
+        assert !filename.endsWith(avoidExt) : msg;
+        String basename = filename.substring(0, lastPeriodIndex);
+        evaluateCharCounts(basename);
+    }
+    
 }
