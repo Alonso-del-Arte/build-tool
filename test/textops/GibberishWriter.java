@@ -119,8 +119,7 @@ class GibberishWriter {
     static String randomFilename(String avoidExt) {
         String basename 
                 = randomAlphanumeric(OLD_MS_DOS_BASENAME_CHARACTER_LIMIT);
-        String extension 
-                = randomAlphanumeric(OLD_MS_DOS_EXTENSION_CHARACTER_LIMIT);
+        String extension = avoidExt;
         while (avoidExt.equals(extension)) {
             extension 
                     = randomAlphanumeric(OLD_MS_DOS_EXTENSION_CHARACTER_LIMIT);
