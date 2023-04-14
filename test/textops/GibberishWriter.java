@@ -43,6 +43,16 @@ class GibberishWriter {
     private static final String DIGITS = "0123456789";
     
     /**
+     * How many characters an old MS-DOS file basename was allowed to have.
+     */
+    private static final int OLD_MS_DOS_BASENAME_CHARACTER_LIMIT = 8;
+    
+    /**
+     * How many characters an old MS-DOS file extension was allowed to have.
+     */
+    private static final int OLD_MS_DOS_EXTENSION_CHARACTER_LIMIT = 3;
+    
+    /**
      * A concatenation of {@link #UPPERCASE_LETTERS}, {@link #LOWERCASE_LETTERS} 
      * and {@link #DIGITS}. The digits are deliberately concatenated twice so as 
      * to ensure that at least one of them occurs in shorter outputs of {@link 
@@ -70,6 +80,8 @@ class GibberishWriter {
     static String randomAlphanumeric(int length) {
         char[] characters = new char[length];
         int uppercaseLetterCount = 0;
+        int lowercaseLetterCount = 0;
+        int digitCount = 0;
         for (int i = 0; i < length; i++) {
             char ch = ALPHANUMERICS
                     .charAt(RANDOM.nextInt(ALPHANUMERICS_LENGTH));
@@ -77,17 +89,43 @@ class GibberishWriter {
             if (UPPERCASE_LETTERS.indexOf(ch) > -1) {
                 uppercaseLetterCount++;
             }
+            if (LOWERCASE_LETTERS.indexOf(ch) > -1) {
+                lowercaseLetterCount++;
+            }
         }
         if (uppercaseLetterCount == 0 && length > 0) {
             characters[0] = UPPERCASE_LETTERS
                     .charAt(RANDOM.nextInt(UPPERCASE_LETTERS.length()));
         }
+        if (lowercaseLetterCount == 0 && uppercaseLetterCount > 1) {
+            int index = 0;
+            while (UPPERCASE_LETTERS.indexOf(characters[index]) < 0) {
+                index++;
+            }
+            characters[index] = LOWERCASE_LETTERS
+                    .charAt(RANDOM.nextInt(LOWERCASE_LETTERS.length()));
+            uppercaseLetterCount--;
+            lowercaseLetterCount++;
+        }
+        if (digitCount == 0) {
+            if (uppercaseLetterCount + lowercaseLetterCount > 8) {
+                characters[length - 1] 
+                        = DIGITS.charAt(RANDOM.nextInt(DIGITS.length()));
+            }
+        }
         return new String(characters);
     }
     
-    // TODO: Write tests for this
-    static String randomFilename(String avoidExt) {String s = "qq";
-        return "SORRY, NOT IMPLEMENTED YET." + avoidExt;
+    static String randomFilename(String avoidExt) {
+        String basename 
+                = randomAlphanumeric(OLD_MS_DOS_BASENAME_CHARACTER_LIMIT);
+        String extension 
+                = randomAlphanumeric(OLD_MS_DOS_EXTENSION_CHARACTER_LIMIT);
+        while (avoidExt.equals(extension)) {
+            extension 
+                    = randomAlphanumeric(OLD_MS_DOS_EXTENSION_CHARACTER_LIMIT);
+        }
+        return basename + '.' + extension;
     }
     
 }
