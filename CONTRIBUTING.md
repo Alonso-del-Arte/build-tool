@@ -12,9 +12,12 @@ of Java provided they don't use features not available in Java 8.
 
 In my testing framework project, I demonstrated that it's possible to create a 
 testing framework without using an existing testing framework. Surely it's 
-possible to create a build tool without an existing build tool, but I'm not 
-interested in that. So this project uses Apache Ant, which, as far as I can 
-tell, is the NetBeans default.
+possible to create a build tool without an existing build tool, but I wasn't  
+interested in that.
+
+Not at first anyway. So at first this project used Apache Ant, which, as far as 
+I can tell, is the NetBeans default. However, once I get the auxiliary stuff 
+working, I will change the project to not use any existing build tools.
 
 Pull requests trying to impose Maven or Gradle on this project will be rejected 
 as spam. If there's an example of how not to make a build tool, that's gotta be 

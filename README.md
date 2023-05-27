@@ -21,3 +21,9 @@ the project structure.
 Unlike my testing framework that doesn't use existing testing frameworks to test 
 itself, this build tool is built using whatever the NetBeans default is, and at 
 this point I'm not worrying about trying to make this build tool build itself.
+
+**May 26, 2023**: I change my mind, I've decided that ultimately, this build 
+tool won't depend on any already existing build tool. Once I get the auxiliary 
+stuff (e.g., the `textops` package) working properly, I will delete anything 
+pertaining to existing build tools, and from then on I will build the project 
+"manually" on the command line.
