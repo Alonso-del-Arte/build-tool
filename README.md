@@ -27,3 +27,7 @@ tool won't depend on any already existing build tool. Once I get the auxiliary
 stuff (e.g., the `textops` package) working properly, I will delete anything 
 pertaining to existing build tools, and from then on I will build the project 
 "manually" on the command line.
+
+**April 1, 2024**: I've decided that I will also switch this project over to my 
+own testing framework. The expected date for the 1.0 release of that framework 
+is April 10, 2024.
